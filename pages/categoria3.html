@@ -10,78 +10,27 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <a href="../index.html">
-                <img src="../assets/imagenes/logo-roti.png" alt="Logo La Colonia">
-                <span>La Colonia</span>
-            </a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="registro.html">Registro</a></li>
-            <li><a href="categoria1.html">Empanadas</a></li>
-            <li><a href="categoria2.html">Pizzas</a></li>
-            <li><a href="categoria3.html">Papas</a></li>
-        </ul>
-    </nav>
+    <!-- Navbar dinámica -->
+    <nav class="navbar"></nav>
 
-    <!-- Contenido principal -->
     <main class="main-content">
         <h1>Porciones de Papas</h1>
         <p>Deliciosas opciones para acompañar tus comidas favoritas 🍟</p>
 
-        <section class="productos">
-            <!-- Producto 1 -->
-            <div class="card">
-                <img src="../assets/imagenes/papas.png" alt="Porción de Papas">
-                <h3>Porción de Papas</h3>
-                <p>Papas fritas doradas y crujientes, recién hechas.</p>
-                <p class="precio">$3000</p>
-                <div class="acciones">
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="btn-comprar">Agregar al carrito</button>
-                </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="card">
-                <img src="../assets/imagenes/papas-huevo.png" alt="Porción de Papas con Huevo">
-                <h3>Porción de Papas con Huevo</h3>
-                <p>Papas fritas mezcladas con huevo revuelto, una combinación clásica y deliciosa.</p>
-                <p class="precio">$5000</p>
-                <div class="acciones">
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="btn-comprar">Agregar al carrito</button>
-                </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="card">
-                <img src="../assets/imagenes/papas-cheddar.png" alt="Porción de Papas con Cheddar">
-                <h3>Porción de Papas con Cheddar</h3>
-                <p>Papas cubiertas con queso cheddar fundido, irresistibles.</p>
-                <p class="precio">$6000</p>
-                <div class="acciones">
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="btn-comprar">Agregar al carrito</button>
-                </div>
-            </div>
-
-            <!-- Producto 4 -->
-            <div class="card">
-                <img src="../assets/imagenes/salchipapa.png" alt="Salchipapa">
-                <h3>Salchipapa</h3>
-                <p>Porción de papas fritas con salchichas, sabor clásico y casero.</p>
-                <p class="precio">$4000</p>
-                <div class="acciones">
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="btn-comprar">Agregar al carrito</button>
-                </div>
-            </div>
-        </section>
+        <!-- Contenedor vacío: las cards se generarán desde JS -->
+        <section class="productos"></section>
     </main>
 
+    <!-- Scripts -->
+    <script src="../js/login.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/cards.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            checkLogin();          // Verifica si el usuario está logueado
+            generarNavbar();       // Genera la navbar dinámica
+            generarCards("Papas"); // Genera solo la categoría Papas
+        });
+    </script>
 </body>
 </html>

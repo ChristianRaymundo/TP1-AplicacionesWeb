@@ -10,54 +10,27 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <a href="../index.html">
-                <img src="../assets/imagenes/logo-roti.png" alt="Logo La Colonia">
-                <span>La Colonia</span>
-            </a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="registro.html">Registro</a></li>
-            <li><a href="categoria1.html">Empanadas</a></li>
-            <li><a href="categoria2.html">Pizzas</a></li>
-            <li><a href="categoria3.html">Papas</a></li>
-        </ul>
-    </nav>
+    <!-- Navbar dinámica -->
+    <nav class="navbar"></nav>
 
-    <!-- Contenido principal -->
     <main class="main-content">
         <h1>Pizzas Artesanales</h1>
         <p>Preparadas con masa casera, salsa de tomate natural y los mejores ingredientes 🍕</p>
 
-        <section class="productos">
-            <!-- Pizza Muzarella -->
-            <div class="card">
-                <img src="../assets/imagenes/pizza-muzza.png" alt="Pizza Muzarella">
-                <h3>Pizza Muzarella</h3>
-                <p>Clásica pizza con salsa de tomate, abundante queso y orégano.</p>
-                <p class="precio">$6000</p>
-                <div class="acciones">
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="btn-comprar">Agregar al carrito</button>
-                </div>
-            </div>
-
-            <!-- Pizza con Huevo -->
-            <div class="card">
-                <img src="../assets/imagenes/pizza-huevo.png" alt="Pizza con Huevo">
-                <h3>Pizza con Huevo</h3>
-                <p>Base de muzzarella clásica con huevo rallado por encima, suave y sabrosa.</p>
-                <p class="precio">$6500</p>
-                <div class="acciones">
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="btn-comprar">Agregar al carrito</button>
-                </div>
-            </div>
-        </section>
+        <!-- Contenedor vacío: las cards se generarán desde JS -->
+        <section class="productos"></section>
     </main>
 
+    <!-- Scripts -->
+    <script src="../js/login.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/cards.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            checkLogin();          // Verifica si el usuario está logueado
+            generarNavbar();       // Genera la navbar dinámica
+            generarCards("Pizzas"); // Genera solo la categoría Pizzas
+        });
+    </script>
 </body>
 </html>

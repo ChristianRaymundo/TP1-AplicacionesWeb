@@ -10,46 +10,53 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">
-                <img src="assets/imagenes/logo-roti.png" alt="Logo La Colonia">
-                <span>La Colonia</span>
-            </a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="pages/registro.html">Registro</a></li>
-            <li><a href="pages/categoria1.html">Empanadas</a></li>
-            <li><a href="pages/categoria2.html">Pizzas</a></li>
-            <li><a href="pages/categoria3.html">Papas</a></li>
-        </ul>
-    </nav>
+    <!-- navbar dinamica -->
+    <nav class="navbar"></nav>
 
-    <!-- Contenido principal -->
+    <!-- contenido principal -->
     <main class="main-content">
         <h1>Rotisería La Colonia</h1>
         <p>Somos una rotisería barrial dedicada a la venta de comidas caseras por encargo.</p>
 
-        <!-- Tarjetas de categorías -->
-        <section class="productos">
-            <a href="pages/categoria1.html" class="card">
-                <h3>Empanadas</h3>
-                <p>Deliciosas empanadas caseras recién horneadas.</p>
-            </a>
-
-            <a href="pages/categoria2.html" class="card">
-                <h3>Pizzas</h3>
-                <p>Pizzas grandes con ingredientes frescos y sabrosos.</p>
-            </a>
-
-            <a href="pages/categoria3.html" class="card">
-                <h3>Papas</h3>
-                <p>Deliciosas opciones para acompañar tus comidas favoritas.</p>
-            </a>
-        </section>
+        <!-- sección donde se mostraran las categorías -->
+        <section class="productos"></section>
     </main>
 
+    <!-- scripts -->
+    <script src="js/login.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // array de categorías
+        const categoriasIndex = [
+            { titulo: "Empanadas", link: "pages/categoria1.html", descripcion: "Deliciosas empanadas caseras recién horneadas." },
+            { titulo: "Pizzas", link: "pages/categoria2.html", descripcion: "Pizzas grandes con ingredientes frescos y sabrosos." },
+            { titulo: "Papas", link: "pages/categoria3.html", descripcion: "Deliciosas opciones para acompañar tus comidas favoritas." }
+        ];
+
+        // función para generar las cards de categorías
+        function generarCategoriasIndex() {
+            const contenedor = document.querySelector(".productos");
+            if (!contenedor) return;
+            contenedor.innerHTML = "";
+
+            categoriasIndex.forEach(c => {
+                const card = document.createElement("a");
+                card.classList.add("card");
+                card.href = c.link;
+                card.innerHTML = `
+                    <h3>${c.titulo}</h3>
+                    <p>${c.descripcion}</p>
+                `;
+                contenedor.appendChild(card);
+            });
+        }
+
+        // Espera a que el DOM esté cargado
+        document.addEventListener("DOMContentLoaded", function() {
+            generarNavbar();          // Navbar dinámica
+            checkLogin();             // Verifica login
+            generarCategoriasIndex(); // Genera las cards de categorías
+        });
+    </script>
 </body>
 </html>
