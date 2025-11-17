@@ -1,12 +1,15 @@
-                  // redirección si no está logueado
-if (!localStorage.getItem("usuarioLogueado")) {
-    if (!window.location.href.includes("login.html") &&
-        !window.location.href.includes("registro.html")) {
+// chequeo si el usuario esta logeado sino lo mando al login
+function checkRedirect() {
+    const loginPage = window.location.href.includes("login.html");
+    const registroPage = window.location.href.includes("registro.html");
+
+    if (!localStorage.getItem("usuarioLogueado") && !loginPage && !registroPage) {
         window.location.href = "login.html";
     }
 }
 
-                     // registrar usuario
+// registrar usuario
+
 function registrarUsuario() {
     const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
@@ -14,33 +17,45 @@ function registrarUsuario() {
     const password = document.getElementById("password").value;
     const fechaNacimiento = document.getElementById("fechaNacimiento").value;
 
+    if (!email || !password) {
+        alert("Debe completar email y contraseña");
+        return;
+    }
+
+    // guardamos todos los datos pero login solo validara email + password
     localStorage.setItem("usuario", JSON.stringify({ nombre, apellido, email, password, fechaNacimiento }));
-    localStorage.setItem("usuarioLogueado", "true");
-    window.location.href = "../index.html";
+
+    alert("Registro exitoso. Ahora puedes iniciar sesión.");
+
+    // volvemos al login
+    window.location.href = "../login.html";
 }
 
-                         // login
+// login
+
 function checkLogin() {
     const loginForm = document.getElementById("loginForm");
     if (!loginForm) return;
 
     loginForm.addEventListener("submit", function(e) {
         e.preventDefault();
-        const usuarioIngresado = document.getElementById("usuario").value;
-        const claveIngresada = document.getElementById("clave").value;
+
+        const emailIngresado = document.getElementById("usuario").value;
+        const passwordIngresada = document.getElementById("clave").value;
 
         const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-        if (usuario && (usuario.email === usuarioIngresado || usuario.nombre === usuarioIngresado) && usuario.password === claveIngresada) {
+        if (usuario && usuario.email === emailIngresado && usuario.password === passwordIngresada) {
             localStorage.setItem("usuarioLogueado", "true");
             window.location.href = "index.html";
         } else {
-            alert("Usuario o contraseña incorrectos.");
+            alert("Correo o contraseña incorrectos.");
         }
     });
 }
 
-                         // cerrar sesión
+// cerrar sesion
+
 function logoutUser() {
     localStorage.removeItem("usuarioLogueado");
 
@@ -49,3 +64,9 @@ function logoutUser() {
 
     window.location.href = loginPath;
 }
+
+
+// inicializar redirección automatica
+document.addEventListener("DOMContentLoaded", function() {
+    checkRedirect();
+});

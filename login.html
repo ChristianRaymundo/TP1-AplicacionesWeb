@@ -14,7 +14,7 @@
             <h2>Iniciar Sesión</h2>
             <form id="loginForm">
                 <label for="usuario">Usuario o Email:</label>
-                <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario o correo" required>
+                <input type="email" id="usuario" name="usuario" placeholder="Ingrese su usuario o Correo" required>
 
                 <label for="clave">Contraseña:</label>
                 <input type="password" id="clave" name="clave" placeholder="Ingrese su contraseña" required>
@@ -26,5 +26,8 @@
     </main>
 
     <script src="js/login.js"></script>
+    <script>
+        checkLogin(); // reviso si hay usario logeado
+    </script>
 </body>
 </html>

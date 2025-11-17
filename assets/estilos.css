@@ -222,3 +222,29 @@ body {
 .registro-card button:hover {
     background-color: #d9820f;
 }
+
+/* ==========================
+   BOTÓN VER MÁS
+========================== */
+.btn-ver-mas {
+    display: inline-block;
+    padding: 10px 25px;
+    background: linear-gradient(90deg, #f39c12, #d9820f);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    margin: 15px 0;
+}
+
+.btn-ver-mas:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    background: linear-gradient(90deg, #d9820f, #f39c12);
+}
+
+.ver-mas {
+    text-align: center;
+}

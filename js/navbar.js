@@ -1,4 +1,4 @@
-// Array con títulos y links de las páginas (relativos a la raíz)
+// array con titulos y links de las paginas
 const paginas = [
     { titulo: "Inicio", link: "index.html" },
     { titulo: "Empanadas", link: "pages/categoria1.html" },
@@ -6,12 +6,12 @@ const paginas = [
     { titulo: "Papas", link: "pages/categoria3.html" }
 ];
 
-// Función para generar la navbar
+// funcion para generar la navbar
 function generarNavbar() {
     const nav = document.querySelector(".navbar");
-    if (!nav) return; // si no hay navbar en la página, salir
+    if (!nav) return; // si no hay navbar en la página, salir (login y registro)
 
-    // Detecta si estamos dentro de /pages/ para ajustar basePath
+// detecta si estamos dentro de /pages/ para ajustar basePath
     const dentroDePages = window.location.pathname.includes("/pages/");
     const basePath = dentroDePages ? "../" : "";
 
@@ -25,16 +25,13 @@ function generarNavbar() {
         <ul class="nav-links">
     `;
 
-    // Generar links dinámicos
+    // generar los links dinamicos
     paginas.forEach(p => {
         html += `<li><a href="${basePath}${p.link}">${p.titulo}</a></li>`;
     });
 
-    // Mostrar Registro o Cerrar sesión según si el usuario está logueado
-    if (!localStorage.getItem("usuarioLogueado")) {
-        const registroLink = dentroDePages ? "registro.html" : "pages/registro.html";
-        html += `<li><a href="${basePath}${registroLink}">Registro</a></li>`;
-    } else {
+    // si está logueado muestro el botón de cerrar sesión
+    if (localStorage.getItem("usuarioLogueado")) {
         html += `<li><button onclick="logoutUser()" class="logout-btn">Cerrar sesión</button></li>`;
     }
 
@@ -43,5 +40,5 @@ function generarNavbar() {
     nav.innerHTML = html;
 }
 
-// Espera a que el DOM esté cargado
+// espera a que el DOM esté cargado
 document.addEventListener("DOMContentLoaded", generarNavbar);

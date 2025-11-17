@@ -1,53 +1,72 @@
-                        // ajuste de paths según ubicación
+// reviso si estoy dentro de la carpeta pages para ajustar las rutas
 const dentroDePages = window.location.href.includes("pages/");
 const basePath = dentroDePages ? "../" : "";
 
-                        // array de productos
-const productos = [
-    // Empanadas
-    { categoria: "Empanadas", titulo: "Empanada Árabe", descripcion: "Carne, cebolla y tomate con especias, en masa fina y sabor casero.", precio: 8000, imagen: basePath + "assets/imagenes/empanadas-arabes.png" },
-    { categoria: "Empanadas", titulo: "Empanada Criolla", descripcion: "Clásica argentina con carne, cebolla, pimiento y huevo duro.", precio: 8000, imagen: basePath + "assets/imagenes/empanadas-criollas.png" },
-    { categoria: "Empanadas", titulo: "Empanada de Jamón y Queso", descripcion: "Jamón cocido y queso fundido, sabor suave y clásico.", precio: 8000, imagen: basePath + "assets/imagenes/empanadas-jamonyqueso.png" },
+// variable para guardar los productos cargados desde JSON
+let productos = [];
 
-    // Pizzas
-    { categoria: "Pizzas", titulo: "Pizza Muzarella", descripcion: "Clásica pizza con salsa de tomate, abundante queso y orégano.", precio: 6000, imagen: basePath + "assets/imagenes/pizza-muzza.png" },
-    { categoria: "Pizzas", titulo: "Pizza con Huevo", descripcion: "Base de muzzarella clásica con huevo rallado por encima, suave y sabrosa.", precio: 6500, imagen: basePath + "assets/imagenes/pizza-huevo.png" },
+/* ================================
+          cargar JSON con FETCH
+================================ */
+fetch(basePath + "assets/productos.json")
+    .then(res => {
+        if (!res.ok) throw new Error("No se pudo cargar productos.json (status " + res.status + ")");
+        return res.json();
+    })
+    .then(data => {
+        productos = data;
+        iniciarCards();
+    })
+    .catch(error => console.error("Error al cargar productos:", error));
 
-    // Papas
-    { categoria: "Papas", titulo: "Porción de Papas", descripcion: "Papas fritas doradas y crujientes, recién hechas.", precio: 3000, imagen: basePath + "assets/imagenes/papas.png" },
-    { categoria: "Papas", titulo: "Porción de Papas con Huevo", descripcion: "Papas fritas mezcladas con huevo revuelto, una combinación clásica y deliciosa.", precio: 5000, imagen: basePath + "assets/imagenes/papas-huevo.png" },
-    { categoria: "Papas", titulo: "Porción de Papas con Cheddar", descripcion: "Papas cubiertas con queso cheddar fundido, irresistibles.", precio: 6000, imagen: basePath + "assets/imagenes/papas-cheddar.png" },
-    { categoria: "Papas", titulo: "Salchipapa", descripcion: "Porción de papas fritas con salchichas, sabor clásico y casero.", precio: 4000, imagen: basePath + "assets/imagenes/salchipapa.png" }
-];
+/* ================================
+      funcion para generar cards
+================================ */
+function generarCards(categoriaFiltro = null, contenedor = null, cantidad = null) {
+    const cont = contenedor || document.querySelector(".productos");
+    if (!cont) return;
 
-                           // función para generar las cards de productos
-function generarCards(categoriaFiltro = null) {
-    const contenedor = document.querySelector(".productos");
-    if (!contenedor) return;
-    contenedor.innerHTML = "";
+    cont.innerHTML = ""; // limpio antes de agregar algo nuevo
 
-    const productosFiltrados = categoriaFiltro ? productos.filter(p => p.categoria === categoriaFiltro) : productos;
+    let productosFiltrados = categoriaFiltro
+        ? productos.filter(p => p.categoria === categoriaFiltro)
+        : productos;
 
+    if (cantidad) {
+        productosFiltrados = productosFiltrados.slice(0, cantidad);
+    }
+    // creo cada card
     productosFiltrados.forEach(p => {
-        const card = document.createElement("div");
+        const card = document.createElement("a");
         card.classList.add("card");
+        card.href = "#";
         card.innerHTML = `
-            <img src="${p.imagen}" alt="${p.titulo}">
+            <img src="${basePath + p.imagen}" alt="${p.titulo}">
             <h3>${p.titulo}</h3>
             <p>${p.descripcion}</p>
-            <p class="precio">$${p.precio} la docena</p>
+            <p class="precio">$${p.precio}</p>
             <div class="acciones">
-                <input type="number" min="1" value="1" class="cantidad">
+                <input type="number" class="cantidad" min="1" value="1">
                 <button class="btn-comprar">Agregar al carrito</button>
             </div>
         `;
-        contenedor.appendChild(card);
+        cont.appendChild(card);
     });
 }
 
-                              // ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", () => {
-    if (window.location.href.includes("categoria1.html")) generarCards("Empanadas");
-    else if (window.location.href.includes("categoria2.html")) generarCards("Pizzas");
-    else if (window.location.href.includes("categoria3.html")) generarCards("Papas");
-});
+/* ==========================================
+          funcion para ver que card mostrar
+========================================== */
+function iniciarCards() {
+    const url = window.location.href;
+
+    if (url.includes("categoria1.html")) generarCards("Empanadas");
+    else if (url.includes("categoria2.html")) generarCards("Pizzas");
+    else if (url.includes("categoria3.html")) generarCards("Papas");
+    else if (url.endsWith("index.html") || url === basePath) {
+        // productos destacados en la home
+        generarCards("Pizzas", document.getElementById("pizzas-destacadas"), 3);
+        generarCards("Empanadas", document.getElementById("empanadas-destacadas"), 3);
+        generarCards("Papas", document.getElementById("papas-destacadas"), 3);
+    }
+}

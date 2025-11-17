@@ -1,0 +1,79 @@
+[
+    {
+        "categoria": "Empanadas",
+        "titulo": "Empanada Árabe",
+        "descripcion": "Carne, cebolla y tomate con especias, en masa fina y sabor casero.",
+        "precio": 8000,
+        "imagen": "assets/imagenes/empanadas-arabes.png"
+    },
+    {
+        "categoria": "Empanadas",
+        "titulo": "Empanada Criolla",
+        "descripcion": "Clásica argentina con carne, cebolla, pimiento y huevo duro.",
+        "precio": 8000,
+        "imagen": "assets/imagenes/empanadas-criollas.png"
+    },
+    {
+        "categoria": "Empanadas",
+        "titulo": "Empanada de Jamón y Queso",
+        "descripcion": "Jamón cocido y queso fundido, sabor suave y clásico.",
+        "precio": 8000,
+        "imagen": "assets/imagenes/empanadas-jamonyqueso.png"
+    },
+    {
+        "categoria": "Pizzas",
+        "titulo": "Pizza Muzarella",
+        "descripcion": "Clásica pizza con salsa de tomate, abundante queso y orégano.",
+        "precio": 6000,
+        "imagen": "assets/imagenes/pizza-muzza.png"
+    },
+    {
+        "categoria": "Pizzas",
+        "titulo": "Pizza con Huevo",
+        "descripcion": "Base de muzzarella clásica con huevo rallado por encima, suave y sabrosa.",
+        "precio": 6500,
+        "imagen": "assets/imagenes/pizza-huevo.png"
+    },
+    {
+        "categoria": "Pizzas",
+        "titulo": "Pizza con Salame",
+        "descripcion": "Pizza clásica con salsa de tomate, muzzarella y finas rodajas de salame.",
+        "precio": 7000,
+        "imagen": "assets/imagenes/pizza-salame.png"
+    },
+    {
+        "categoria": "Pizzas",
+        "titulo": "Pizza con Papas y Cheddar",
+        "descripcion": "Muzzarella sobre salsa de tomate, cubierta con papas fritas y un toque de cheddar.",
+        "precio": 10000,
+        "imagen": "assets/imagenes/pizza-papas-cheddar.png"
+    },
+    {
+        "categoria": "Papas",
+        "titulo": "Porción de Papas",
+        "descripcion": "Papas fritas doradas y crujientes, recién hechas.",
+        "precio": 3000,
+        "imagen": "assets/imagenes/papas.png"
+    },
+    {
+        "categoria": "Papas",
+        "titulo": "Porción de Papas con Huevo",
+        "descripcion": "Papas fritas mezcladas con huevo revuelto, una combinación clásica y deliciosa.",
+        "precio": 5000,
+        "imagen": "assets/imagenes/papas-huevo.png"
+    },
+    {
+        "categoria": "Papas",
+        "titulo": "Porción de Papas con Cheddar",
+        "descripcion": "Papas cubiertas con queso cheddar fundido, irresistibles.",
+        "precio": 6000,
+        "imagen": "assets/imagenes/papas-cheddar.png"
+    },
+    {
+        "categoria": "Papas",
+        "titulo": "Salchipapa",
+        "descripcion": "Porción de papas fritas con salchichas, sabor clásico y casero.",
+        "precio": 4000,
+        "imagen": "assets/imagenes/salchipapa.png"
+    }
+]

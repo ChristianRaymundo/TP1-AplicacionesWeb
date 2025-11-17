@@ -18,25 +18,60 @@
         <h1>Rotisería La Colonia</h1>
         <p>Somos una rotisería barrial dedicada a la venta de comidas caseras por encargo.</p>
 
-        <!-- sección donde se mostraran las categorías -->
+        <!-- muestro las categorías -->
         <section class="productos"></section>
+
+        <!-- productos destacados por categoría -->
+        <h2>Pizzas Destacadas</h2>
+        <section id="pizzas-destacadas" class="productos"></section>
+        <div class="ver-mas">
+            <a href="pages/categoria2.html" class="btn-ver-mas">Ver más Pizzas</a>
+        </div>
+
+        <h2>Empanadas Destacadas</h2>
+        <section id="empanadas-destacadas" class="productos"></section>
+        <div class="ver-mas">
+            <a href="pages/categoria1.html" class="btn-ver-mas">Ver más Empanadas</a>
+        </div>
+
+        <h2>Papas Destacadas</h2>
+        <section id="papas-destacadas" class="productos"></section>
+        <div class="ver-mas">
+            <a href="pages/categoria3.html" class="btn-ver-mas">Ver más Papas</a>
+        </div>
+
     </main>
 
     <!-- scripts -->
     <script src="js/login.js"></script>
     <script src="js/navbar.js"></script>
+    <script src="js/cards.js"></script>
+
     <script>
-        // array de categorías
+        // array de categorias mostradas en el Home
         const categoriasIndex = [
-            { titulo: "Empanadas", link: "pages/categoria1.html", descripcion: "Deliciosas empanadas caseras recién horneadas." },
-            { titulo: "Pizzas", link: "pages/categoria2.html", descripcion: "Pizzas grandes con ingredientes frescos y sabrosos." },
-            { titulo: "Papas", link: "pages/categoria3.html", descripcion: "Deliciosas opciones para acompañar tus comidas favoritas." }
+            {
+                titulo: "Empanadas",
+                link: "pages/categoria1.html",
+                descripcion: "Deliciosas empanadas caseras recién horneadas."
+            },
+            {
+                titulo: "Pizzas",
+                link: "pages/categoria2.html",
+                descripcion: "Pizzas grandes con ingredientes frescos y sabrosos."
+            },
+            {
+                titulo: "Papas",
+                link: "pages/categoria3.html",
+                descripcion: "Deliciosas opciones para acompañar tus comidas favoritas."
+            }
         ];
 
-        // función para generar las cards de categorías
+        // funcion para generar las cards de categorias
         function generarCategoriasIndex() {
             const contenedor = document.querySelector(".productos");
             if (!contenedor) return;
+
             contenedor.innerHTML = "";
 
             categoriasIndex.forEach(c => {
@@ -51,12 +86,13 @@
             });
         }
 
-        // Espera a que el DOM esté cargado
+        // cuando la pagina carga
         document.addEventListener("DOMContentLoaded", function() {
-            generarNavbar();          // Navbar dinámica
-            checkLogin();             // Verifica login
-            generarCategoriasIndex(); // Genera las cards de categorías
+            generarNavbar();          // navbar dinámica
+            checkLogin();             // revisa si hay usuario logeado
+            generarCategoriasIndex(); // genera las cards de categorías
         });
     </script>
+
 </body>
 </html>

@@ -9,26 +9,27 @@
     <link rel="stylesheet" href="../assets/estilos.css">
 </head>
 <body>
-    <!-- Navbar dinámica -->
+    
+    <!-- navbar dinamica -->
     <nav class="navbar"></nav>
 
     <main class="main-content">
         <h1>Empanadas Artesanales</h1>
         <p>Variedad de empanadas caseras con sabores tradicionales y recién horneadas 🥟</p>
 
-        <!-- Contenedor vacío: las cards se generarán desde JS -->
+        <!-- las cards se generaran desde JS -->
         <section class="productos"></section>
     </main>
 
-    <!-- Scripts -->
+    <!-- scripts -->
     <script src="../js/login.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/cards.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            checkLogin();             // Verifica si el usuario está logueado
-            generarNavbar();          // Genera la navbar dinámica
-            generarCards("Empanadas"); // Genera solo la categoría Empanadas
+            checkLogin();             // verifico si el usuario esta logueado
+            generarNavbar();          // genero la navbar dinamica
+
         });
     </script>
 </body>
