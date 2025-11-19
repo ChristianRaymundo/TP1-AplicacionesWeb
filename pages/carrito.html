@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Carrito - Rotisería La Colonia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/estilos.css">
+</head>
+<body>
+
+    <!-- navbar dinámica -->
+    <nav class="navbar"></nav>
+
+    <main class="main-content">
+        <h1>Mi Carrito</h1>
+
+        <!-- 🔥 Caja del carrito (necesaria para el diseño nuevo) -->
+        <div class="carrito-wrapper">
+            <section id="carrito-contenedor"></section>
+            <div id="total-carrito" class="total-carrito"></div>
+        </div>
+
+    </main>
+
+    <!-- scripts -->
+    <script src="../js/login.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/carrito.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            generarNavbar();
+        });
+    </script>
+</body>
+</html>

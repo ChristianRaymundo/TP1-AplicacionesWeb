@@ -1,13 +1,3 @@
-// chequeo si el usuario esta logeado sino lo mando al login
-function checkRedirect() {
-    const loginPage = window.location.href.includes("login.html");
-    const registroPage = window.location.href.includes("registro.html");
-
-    if (!localStorage.getItem("usuarioLogueado") && !loginPage && !registroPage) {
-        window.location.href = "login.html";
-    }
-}
-
 // registrar usuario
 
 function registrarUsuario() {
@@ -22,7 +12,7 @@ function registrarUsuario() {
         return;
     }
 
-    // guardamos todos los datos pero login solo validara email + password
+    // guardamos los datos del usuario en localStorage (esto está bien)
     localStorage.setItem("usuario", JSON.stringify({ nombre, apellido, email, password, fechaNacimiento }));
 
     alert("Registro exitoso. Ahora puedes iniciar sesión.");
@@ -31,11 +21,17 @@ function registrarUsuario() {
     window.location.href = "../login.html";
 }
 
-// login
-
+// LOGIN (con sessionStorage)
 function checkLogin() {
     const loginForm = document.getElementById("loginForm");
     if (!loginForm) return;
+
+    // si ya está logueado, va directo al index (sessionStorage ahora)
+    const logged = sessionStorage.getItem("usuarioLogueado");
+    if (logged === "true") {
+        window.location.href = "index.html";
+        return;
+    }
 
     loginForm.addEventListener("submit", function(e) {
         e.preventDefault();
@@ -46,7 +42,9 @@ function checkLogin() {
         const usuario = JSON.parse(localStorage.getItem("usuario"));
 
         if (usuario && usuario.email === emailIngresado && usuario.password === passwordIngresada) {
-            localStorage.setItem("usuarioLogueado", "true");
+
+            sessionStorage.setItem("usuarioLogueado", "true");
+
             window.location.href = "index.html";
         } else {
             alert("Correo o contraseña incorrectos.");
@@ -54,19 +52,13 @@ function checkLogin() {
     });
 }
 
-// cerrar sesion
-
+// cerrar sesión
 function logoutUser() {
-    localStorage.removeItem("usuarioLogueado");
+    sessionStorage.removeItem("usuarioLogueado");
 
     const dentroDePages = window.location.href.includes("pages/");
     const loginPath = dentroDePages ? "../login.html" : "login.html";
 
     window.location.href = loginPath;
+    
 }
-
-
-// inicializar redirección automatica
-document.addEventListener("DOMContentLoaded", function() {
-    checkRedirect();
-});

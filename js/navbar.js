@@ -1,19 +1,20 @@
-// array con titulos y links de las paginas
-const paginas = [
-    { titulo: "Inicio", link: "index.html" },
+// páginas visibles SOLO para usuarios logueados
+const paginasProtegidas = [
     { titulo: "Empanadas", link: "pages/categoria1.html" },
     { titulo: "Pizzas", link: "pages/categoria2.html" },
     { titulo: "Papas", link: "pages/categoria3.html" }
 ];
 
-// funcion para generar la navbar
+// función para generar navbar dinamica
 function generarNavbar() {
     const nav = document.querySelector(".navbar");
-    if (!nav) return; // si no hay navbar en la página, salir (login y registro)
+    if (!nav) return;
 
-// detecta si estamos dentro de /pages/ para ajustar basePath
+    // detectar si estamos dentro de /pages/
     const dentroDePages = window.location.pathname.includes("/pages/");
     const basePath = dentroDePages ? "../" : "";
+
+    const usuarioLogueado = sessionStorage.getItem("usuarioLogueado");
 
     let html = `
         <div class="logo">
@@ -25,20 +26,49 @@ function generarNavbar() {
         <ul class="nav-links">
     `;
 
-    // generar los links dinamicos
-    paginas.forEach(p => {
-        html += `<li><a href="${basePath}${p.link}">${p.titulo}</a></li>`;
-    });
+    // Inicio SIEMPRE visible
+    html += `<li><a href="${basePath}index.html">Inicio</a></li>`;
 
-    // si está logueado muestro el botón de cerrar sesión
-    if (localStorage.getItem("usuarioLogueado")) {
+    // si NO está logueado → mostrar Iniciar sesión + Registrarse
+    if (!usuarioLogueado) {
+        html += `
+            <li><a href="${basePath}login.html">Iniciar sesión</a></li>
+            <li><a href="${basePath}pages/registro.html">Registrarse</a></li>
+        `;
+    }
+
+    // si está logueado → mostrar categorías + carrito + cerrar sesión
+    if (usuarioLogueado) {
+
+        // categorías protegidas
+        paginasProtegidas.forEach(p => {
+            html += `<li><a href="${basePath}${p.link}">${p.titulo}</a></li>`;
+        });
+
+        // 🛒 BOTÓN DEL CARRITO (nuevo)
+        html += `
+            <li>
+                <a href="${basePath}pages/carrito.html" class="carrito-btn">🛒 Carrito</a>
+            </li>
+        `;
+
+        // botón cerrar sesión
         html += `<li><button onclick="logoutUser()" class="logout-btn">Cerrar sesión</button></li>`;
     }
 
     html += `</ul>`;
-
+    
     nav.innerHTML = html;
 }
 
-// espera a que el DOM esté cargado
+// Cerrar sesión
+function logoutUser() {
+    sessionStorage.removeItem("usuarioLogueado");
+
+    const dentroDePages = window.location.pathname.includes("/pages/");
+    const basePath = dentroDePages ? "../" : "";
+
+    window.location.href = basePath + "index.html";
+}
+
 document.addEventListener("DOMContentLoaded", generarNavbar);

@@ -133,6 +133,14 @@ body {
     color: #555;
 }
 
+.detalle-precio {
+    font-size: 0.8em;
+    color: #d47a00;
+    font-weight: bold;
+    margin-top: -8px;
+    margin-bottom: 8px;
+}
+
 /* Contenedor de input y botón */
 .card .acciones {
     display: flex;
@@ -247,4 +255,102 @@ body {
 
 .ver-mas {
     text-align: center;
+}
+
+
+/* ==========================
+        CARRITO
+========================== */
+
+.carrito-wrapper {
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#carrito-contenedor {
+    width: 100%;
+}
+
+.carrito-header, .carrito-item {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr 0.8fr;
+    align-items: center;
+    padding: 12px 10px;
+}
+
+.carrito-header {
+    background-color: #f39c12;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.carrito-item {
+    border-bottom: 1px solid #eee;
+}
+
+.producto-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.producto-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.producto-info span {
+    font-weight: bold;
+    color: #b34700;
+}
+
+.precio, .cantidad, .subtotal {
+    text-align: center;
+    font-size: 15px;
+}
+
+.cantidad input {
+    width: 55px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn-eliminar {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-eliminar:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+.total-carrito {
+    text-align: right;
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #b34700;
+}
+
+/* mensaje carrito vacío */
+.carrito-vacio {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 20px;
+    color: #444;
 }

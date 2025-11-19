@@ -35,19 +35,25 @@ function generarCards(categoriaFiltro = null, contenedor = null, cantidad = null
     if (cantidad) {
         productosFiltrados = productosFiltrados.slice(0, cantidad);
     }
+
     // creo cada card
     productosFiltrados.forEach(p => {
-        const card = document.createElement("a");
+        const card = document.createElement("div");
         card.classList.add("card");
         card.href = "#";
         card.innerHTML = `
             <img src="${basePath + p.imagen}" alt="${p.titulo}">
             <h3>${p.titulo}</h3>
             <p>${p.descripcion}</p>
-            <p class="precio">$${p.precio}</p>
+            <p class="precio">$${p.precio.toLocaleString("es-AR")}</p>
+            ${p.detallePrecio ? `<p class="detalle-precio">${p.detallePrecio}</p>` : ""}
+            
             <div class="acciones">
                 <input type="number" class="cantidad" min="1" value="1">
-                <button class="btn-comprar">Agregar al carrito</button>
+                <button class="btn-comprar"
+                    onclick="agregarAlCarrito(${p.id}, this.previousElementSibling.value)">
+                    Agregar al carrito
+                </button>
             </div>
         `;
         cont.appendChild(card);
@@ -69,4 +75,44 @@ function iniciarCards() {
         generarCards("Empanadas", document.getElementById("empanadas-destacadas"), 3);
         generarCards("Papas", document.getElementById("papas-destacadas"), 3);
     }
+}
+
+/* ======================================================
+      FUNCION PARA AGREGAR AL CARRITO
+====================================================== */
+function agregarAlCarrito(productoId, cantidad) {
+
+    // 1. Verificar login
+    if (!sessionStorage.getItem("usuarioLogueado")) {
+
+        alert("Debes iniciar sesión para agregar productos al carrito.");
+
+        const dentroDePages = window.location.href.includes("pages/");
+        const loginPath = dentroDePages ? "../login.html" : "login.html";
+
+        window.location.href = loginPath;
+        return;
+    }
+
+    // 2. Obtener carrito actual o crearlo vacío
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // 3. Verificar si el producto ya está en el carrito
+    const existente = carrito.find(item => item.id === productoId);
+
+    if (existente) {
+        // si ya existe, sumo la cantidad
+        existente.cantidad += parseInt(cantidad);
+    } else {
+        // si no existe, lo agrego nuevo
+        carrito.push({
+            id: productoId,
+            cantidad: parseInt(cantidad)
+        });
+    }
+
+    // 4. Guardar carrito actualizado
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    alert("Producto agregado al carrito.");
 }
