@@ -44,7 +44,8 @@ function mostrarCarrito() {
         const producto = productos.find(p => p.id === item.id);
         if (!producto) return;
 
-        const subtotal = producto.precio * item.cantidad;
+        // calcular subtotal según múltiplos de docena
+        const subtotal = (producto.precio / 12) * item.cantidad;
         total += subtotal;
 
         const div = document.createElement("div");
@@ -56,7 +57,7 @@ function mostrarCarrito() {
             </div>
             <div class="precio">$${producto.precio.toLocaleString("es-AR")}</div>
             <div class="cantidad">
-                <input type="number" min="1" value="${item.cantidad}" data-id="${item.id}" class="cantidad-input">
+                <input type="number" min="6" step="6" value="${item.cantidad}" data-id="${item.id}" class="cantidad-input">
             </div>
             <div class="subtotal">$${subtotal.toLocaleString("es-AR")}</div>
             <div><button class="btn-eliminar" data-id="${item.id}">Eliminar</button></div>
@@ -76,7 +77,11 @@ function agregarListenersCarrito() {
         input.addEventListener("change", function() {
             const id = parseInt(this.dataset.id);
             let nuevaCant = parseInt(this.value);
-            if (isNaN(nuevaCant) || nuevaCant < 1) nuevaCant = 1;
+            if (isNaN(nuevaCant) || nuevaCant < 6) nuevaCant = 6;
+
+            // asegurar múltiplo de 6
+            nuevaCant = Math.ceil(nuevaCant / 6) * 6;
+
             cambiarCantidad(id, nuevaCant);
         });
     });

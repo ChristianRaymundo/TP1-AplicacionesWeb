@@ -41,15 +41,27 @@ function generarCards(categoriaFiltro = null, contenedor = null, cantidad = null
         const card = document.createElement("div");
         card.classList.add("card");
         card.href = "#";
+
+        // input de cantidad: si es empanadas, select de múltiplos de 6
+        const inputCantidad = p.categoria === "Empanadas"
+            ? `<select class="cantidad">
+                  <option value="6">6</option>
+                  <option value="12">12</option>
+                  <option value="18">18</option>
+                  <option value="24">24</option>
+                  <option value="30">30</option>
+               </select>`
+            : `<input type="number" class="cantidad" min="1" value="1">`;
+
         card.innerHTML = `
             <img src="${basePath + p.imagen}" alt="${p.titulo}">
             <h3>${p.titulo}</h3>
             <p>${p.descripcion}</p>
             <p class="precio">$${p.precio.toLocaleString("es-AR")}</p>
             ${p.detallePrecio ? `<p class="detalle-precio">${p.detallePrecio}</p>` : ""}
-            
+
             <div class="acciones">
-                <input type="number" class="cantidad" min="1" value="1">
+                ${inputCantidad}
                 <button class="btn-comprar"
                     onclick="agregarAlCarrito(${p.id}, this.previousElementSibling.value)">
                     Agregar al carrito
@@ -84,12 +96,8 @@ function agregarAlCarrito(productoId, cantidad) {
 
     // 1. Verificar login
     if (!sessionStorage.getItem("usuarioLogueado")) {
-
         alert("Debes iniciar sesión para agregar productos al carrito.");
-
-        const dentroDePages = window.location.href.includes("pages/");
         const loginPath = dentroDePages ? "../login.html" : "login.html";
-
         window.location.href = loginPath;
         return;
     }
@@ -97,17 +105,19 @@ function agregarAlCarrito(productoId, cantidad) {
     // 2. Obtener carrito actual o crearlo vacío
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+    cantidad = parseInt(cantidad);
+
     // 3. Verificar si el producto ya está en el carrito
     const existente = carrito.find(item => item.id === productoId);
 
     if (existente) {
         // si ya existe, sumo la cantidad
-        existente.cantidad += parseInt(cantidad);
+        existente.cantidad += cantidad;
     } else {
         // si no existe, lo agrego nuevo
         carrito.push({
             id: productoId,
-            cantidad: parseInt(cantidad)
+            cantidad: cantidad
         });
     }
 
