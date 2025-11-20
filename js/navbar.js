@@ -1,11 +1,11 @@
-// páginas visibles SOLO para usuarios logueados
+// paginas visibles SOLO para usuarios logueados
 const paginasProtegidas = [
     { titulo: "Empanadas", link: "pages/categoria1.html" },
     { titulo: "Pizzas", link: "pages/categoria2.html" },
     { titulo: "Papas", link: "pages/categoria3.html" }
 ];
 
-// función para generar navbar dinamica
+// funcion para generar navbar dinamica
 function generarNavbar() {
     const nav = document.querySelector(".navbar");
     if (!nav) return;
@@ -26,10 +26,10 @@ function generarNavbar() {
         <ul class="nav-links">
     `;
 
-    // Inicio SIEMPRE visible
+    // boton de INICIO siempre visible
     html += `<li><a href="${basePath}index.html">Inicio</a></li>`;
 
-    // si NO está logueado → mostrar Iniciar sesión + Registrarse
+    // si NO esta logueado mostrar Iniciar sesion + Registrarse
     if (!usuarioLogueado) {
         html += `
             <li><a href="${basePath}login.html">Iniciar sesión</a></li>
@@ -37,7 +37,7 @@ function generarNavbar() {
         `;
     }
 
-    // si está logueado → mostrar categorías + carrito + cerrar sesión
+    // si esta logueado  mostrar categorias + carrito + cerrar sesion
     if (usuarioLogueado) {
 
         // categorías protegidas
@@ -45,14 +45,14 @@ function generarNavbar() {
             html += `<li><a href="${basePath}${p.link}">${p.titulo}</a></li>`;
         });
 
-        // 🛒 BOTÓN DEL CARRITO (nuevo)
+        //  BOTON DEL CARRITO
         html += `
             <li>
                 <a href="${basePath}pages/carrito.html" class="carrito-btn">🛒 Carrito</a>
             </li>
         `;
 
-        // botón cerrar sesión
+        // boton cerrar sesion
         html += `<li><button onclick="logoutUser()" class="logout-btn">Cerrar sesión</button></li>`;
     }
 
@@ -61,7 +61,7 @@ function generarNavbar() {
     nav.innerHTML = html;
 }
 
-// Cerrar sesión
+// cerrar sesion
 function logoutUser() {
     sessionStorage.removeItem("usuarioLogueado");
 

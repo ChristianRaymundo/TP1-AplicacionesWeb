@@ -90,11 +90,11 @@ function iniciarCards() {
 }
 
 /* ======================================================
-      FUNCION PARA AGREGAR AL CARRITO
+      funcion para agregar al carrito
 ====================================================== */
 function agregarAlCarrito(productoId, cantidad) {
 
-    // 1. Verificar login
+    // verificar login
     if (!sessionStorage.getItem("usuarioLogueado")) {
         alert("Debes iniciar sesión para agregar productos al carrito.");
         const loginPath = dentroDePages ? "../login.html" : "login.html";
@@ -102,12 +102,12 @@ function agregarAlCarrito(productoId, cantidad) {
         return;
     }
 
-    // 2. Obtener carrito actual o crearlo vacío
+    // obtener carrito actual o crearlo vacío
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     cantidad = parseInt(cantidad);
 
-    // 3. Verificar si el producto ya está en el carrito
+    // verificar si el producto ya está en el carrito
     const existente = carrito.find(item => item.id === productoId);
 
     if (existente) {
@@ -121,7 +121,7 @@ function agregarAlCarrito(productoId, cantidad) {
         });
     }
 
-    // 4. Guardar carrito actualizado
+    // guardar carrito actualizado
     localStorage.setItem("carrito", JSON.stringify(carrito));
 
     alert("Producto agregado al carrito.");

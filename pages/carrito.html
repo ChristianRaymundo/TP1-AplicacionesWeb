@@ -15,10 +15,44 @@
     <main class="main-content">
         <h1>Mi Carrito</h1>
 
-        <!-- 🔥 Caja del carrito (necesaria para el diseño nuevo) -->
+        <!-- Caja del carrito -->
         <div class="carrito-wrapper">
             <section id="carrito-contenedor"></section>
             <div id="total-carrito" class="total-carrito"></div>
+        </div>
+
+        <!-- 🔥 BOTÓN FINALIZAR COMPRA -->
+        <button id="btn-finalizar" class="btn-finalizar">Finalizar compra</button>
+
+        <!-- 🔥 MODAL PARA ELEGIR FORMA DE PAGO -->
+        <div id="modal-pago" class="modal">
+            <div class="modal-contenido">
+                <h3>Elegir forma de pago</h3>
+
+                <form id="form-pago">
+                    <label>
+                        <input type="radio" name="pago" value="efectivo" required>
+                        Efectivo
+                    </label><br>
+
+                    <label>
+                        <input type="radio" name="pago" value="tarjeta" required>
+                        Tarjeta
+                    </label><br>
+
+                    <label>
+                        <input type="radio" name="pago" value="transferencia" required>
+                        Transferencia
+                    </label><br><br>
+
+                    <button type="submit" class="btn-confirmar-pago">
+                        Confirmar
+                    </button>
+                    <button type="button" class="btn-cancelar" onclick="cerrarModal()">
+                        Cancelar
+                    </button>
+                </form>
+            </div>
         </div>
 
     </main>
@@ -27,10 +61,15 @@
     <script src="../js/login.js"></script>
     <script src="../js/navbar.js"></script>
     <script src="../js/carrito.js"></script>
+
+    <!-- script del modal -->
+    <script src="../js/pago.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             generarNavbar();
         });
     </script>
+
 </body>
 </html>

@@ -26,7 +26,7 @@ function checkLogin() {
     const loginForm = document.getElementById("loginForm");
     if (!loginForm) return;
 
-    // si ya está logueado, va directo al index (sessionStorage ahora)
+    // si ya está logueado va directo al index (sessionStorage)
     const logged = sessionStorage.getItem("usuarioLogueado");
     if (logged === "true") {
         window.location.href = "index.html";
