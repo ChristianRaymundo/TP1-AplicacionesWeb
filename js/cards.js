@@ -81,7 +81,7 @@ function iniciarCards() {
     if (url.includes("categoria1.html")) generarCards("Empanadas");
     else if (url.includes("categoria2.html")) generarCards("Pizzas");
     else if (url.includes("categoria3.html")) generarCards("Papas");
-    else if (url.endsWith("index.html") || url === basePath) {
+    else if (!dentroDePages) {
         // productos destacados en la home
         generarCards("Pizzas", document.getElementById("pizzas-destacadas"), 3);
         generarCards("Empanadas", document.getElementById("empanadas-destacadas"), 3);
