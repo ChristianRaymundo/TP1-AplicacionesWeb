@@ -535,3 +535,84 @@ body {
     font-size: 0.95em;
     margin-top: 15px;
 }
+
+/* ==========================
+            RESPONSIVE
+========================== */
+
+/* para pantallas menores a 768px */
+@media (max-width: 768px) {
+
+    /* navbar en formato vertical */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    /* cards mas anchas para celulares */
+    .card {
+        width: 90%;
+        max-width: 330px;
+    }
+
+    /* carrito en formato vertical */
+    .carrito-header {
+        display: none; /* se oculta la fila de titulos */
+    }
+
+    .carrito-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 2px solid #f2f2f2;
+    }
+
+    .producto-info {
+        flex-direction: column;
+    }
+
+    .producto-info img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .precio, .cantidad, .subtotal {
+        margin-top: 8px;
+    }
+
+    .btn-eliminar {
+        margin-top: 12px;
+    }
+
+    /* MODAL mas chico */
+    .modal-contenido {
+        width: 90%;
+    }
+}
+
+/* Para pantallas MUY chicas (menos de 480px) */
+@media (max-width: 480px) {
+
+    /* logo mas chico */
+    .navbar .logo img {
+        height: 45px;
+        width: 45px;
+    }
+
+    .btn-finalizar {
+        width: 100%;
+    }
+
+    /* Footer en una sola columna*/
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+}
